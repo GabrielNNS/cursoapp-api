@@ -13,10 +13,22 @@ Framework: Django 4.1
 SGBD: Postgresql 
 
 # Para executar
+###Front End:
+- Instalar os pacotes informads
+- Exececutar o comando "npm start" na pasta cursoapp
+###Backed:
 - Ter o ambiente virtual com todas as dependências listadas abaixo. (Mini Conda)
-- Executar o arquivo manage.py na raiz do projeto por linha de comando "manage.py runserver".
+- Executar o arquivo manage.py na pasta "backend" do projeto por linha de comando "manage.py runserver".
 
 ## Dependências
+
+# React
+- tailwind CSS
+- react-bootstrap
+- headlessui
+- heroicons
+- react-router-dom
+
 ### Conda
 - pip
 - django
