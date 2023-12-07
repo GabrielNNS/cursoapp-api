@@ -14,7 +14,7 @@ class CourseSerializer(serializers.ModelSerializer):
             return data
         else: 
             raise serializers.ValidationError(
-                "Number of students does not correspond to the size of the classroom!")
+                "O número de alunos não corresponde ao tamanho da sala de aula!")
         
             
         
