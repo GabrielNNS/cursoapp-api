@@ -1,23 +1,30 @@
-import './index.css';
-
+import "./index.css";
+import Professors from "./pages/Professors";
+import Students from "./pages/Students";
+import Courses from "./pages/Courses";
+import Classrooms from "./pages/Classrooms";
+import Course from "./pages/Course";
+import Header from "./components/Header";
+import AddCourse from "./pages/AddCourse";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import NotFound from "./components/NotFound";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Header className="fixed">
+        <Routes>
+          <Route path="/" element={<Professors />} />
+          <Route path="/professors" element={<Professors />} />
+          <Route path="/students" element={<Students />} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/courses/:id" element={<Course />} />
+          <Route path="/addcourse" element={<AddCourse />} />
+          <Route path="/classrooms" element={<Classrooms />} />
+          <Route path="/404" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Header>
+    </BrowserRouter>
   );
 }
 
