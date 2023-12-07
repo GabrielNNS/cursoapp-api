@@ -157,7 +157,7 @@ export default function EditClassroomModal(props) {
                       });
                     } else {
                       props.toggleShow();
-                      props.updateProfessor();
+                      props.updateClassroom();
                     }
                   })
                   .catch((e) => {
