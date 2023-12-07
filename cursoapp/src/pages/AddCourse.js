@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ErroModalCourse from "../components/ErroModalCourse";
 import { baseUrl } from "../shared";
@@ -45,12 +45,12 @@ export default function Course() {
     const data = {
       name: name,
       description: description,
-      duration: "41 16:00:00", //VERIFICAR ISSO
       professor: professor,
       classroom: parseInt(classroom),
       student: student,
     };
     const url = baseUrl + "/courses/";
+    console.log(data);
     fetch(url, {
       method: "POST",
       headers: {
@@ -61,10 +61,10 @@ export default function Course() {
       .then((response) => {
         if (!response.ok) {
           return response.json().then((data) => {
+            setErrorMessage(data.non_field_errors);
             toggleShowError();
-            setErrorMessage(data);
+            throw new Error(data.non_field_errors || "Error updating course");
           });
-          throw new Error("Algo deu errado");
         }
         navigate("/courses/");
         return response.json();
@@ -142,8 +142,9 @@ export default function Course() {
             defaultValue={student}
             onChange={(e) => {
               const studentIds = e.target.value
-                .split(",")
-                .map((id) => parseInt(id.trim()));
+                .split(",") // assuming IDs are separated by commas
+                .map((id) => parseInt(id.trim())); // convert each ID to an integer
+
               setStudent(studentIds);
             }}
           ></textarea>
