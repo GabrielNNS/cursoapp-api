@@ -8,8 +8,12 @@ import Row from "react-bootstrap/Row";
 
 export default function AddProfessor(props) {
   const [name, setName] = useState("");
-  const [location, setLocation] = useState("");
-  const [size, setSize] = useState("");
+  const [birthday, setBirthday] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [gender, setGender] = useState("M");
+  const [adress, setAdress] = useState("");
+  const [specialty, setSpecialty] = useState("");
 
   const [validated, setValidated] = useState(false);
 
@@ -18,12 +22,20 @@ export default function AddProfessor(props) {
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+      setValidated(true);
     } else {
       event.preventDefault();
-      props.newClassroom(name, location, size);
+      props.newProfessor(
+        name,
+        email,
+        adress,
+        phone,
+        gender,
+        birthday,
+        specialty
+      );
+      setValidated(false);
     }
-
-    setValidated(true);
   };
 
   return (
@@ -32,7 +44,7 @@ export default function AddProfessor(props) {
         className="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded mb-5"
         onClick={props.toggleShow}
       >
-        + Adicionar Sala
+        + Adicionar Professor
       </button>
 
       <Modal show={props.show} onHide={props.toggleShow}>
@@ -42,53 +54,109 @@ export default function AddProfessor(props) {
         <Modal.Body>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Row className="mb-3">
-              <Form.Group as={Col} md="6" controlId="name">
+              <Form.Group as={Col} md="6" controlId="validationCustom01">
                 <Form.Label>Nome</Form.Label>
                 <Form.Control
                   required
                   type="text"
                   placeholder="Nome"
-                  value={name}
                   onChange={(e) => {
                     setName(e.target.value);
                   }}
                 />
                 <Form.Control.Feedback>Tudo certo!</Form.Control.Feedback>
               </Form.Group>
-              <Form.Group as={Col} md="5" controlId="location">
-                <Form.Label>Localização</Form.Label>
+              <Form.Group as={Col} md="5" controlId="validationCustom02">
+                <Form.Label>Especialidade</Form.Label>
                 <Form.Control
                   required
                   type="text"
-                  placeholder="Localização"
-                  defaultValue={location}
+                  placeholder="Especialidade"
                   onChange={(e) => {
-                    setLocation(e.target.value);
+                    setSpecialty(e.target.value);
                   }}
                 />
                 <Form.Control.Feedback>Tudo certo!</Form.Control.Feedback>
               </Form.Group>
             </Row>
             <Row className="mb-3">
-              <Row className="mb-3">
-                <Form.Group as={Col} md="5" controlId="validationCustom07">
-                  <Form.Label>Capacidade</Form.Label>
-                  <Form.Control
-                    type="tel"
-                    placeholder="Capacidade"
-                    defaultValue={size}
-                    onChange={(e) => {
-                      setSize(e.target.value);
-                    }}
-                    required
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    Por favor, informe um número válido
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Row>
+              <Form.Group as={Col} md="6" controlId="validationCustom03">
+                <Form.Label>Endereço</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Endereço"
+                  onChange={(e) => {
+                    setAdress(e.target.value);
+                  }}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Por favor, informar um endereço
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} md="5" controlId="validationCustom04">
+                <Form.Label>Nascimento</Form.Label>
+                <Form.Control
+                  type="date"
+                  placeholder="Nascimento"
+                  onChange={(e) => {
+                    setBirthday(e.target.value);
+                  }}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Por favor, informe uma data válida
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Row>
+            <Row className="mb-3">
+              <Form.Group as={Col} md="7" controlId="validationCustom05">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Email"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                  required
+                />
+
+                <Form.Control.Feedback type="invalid">
+                  Por favor, informe um email válido
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} md="4" controlId="validationCustom06">
+                <Form.Label>Gênero</Form.Label>
+                <Form.Select
+                  defaultValue={"M"}
+                  aria-label="Default select example"
+                  onChange={(e) => {
+                    setGender(e.target.value);
+                  }}
+                >
+                  <option value="M">Masculino</option>
+                  <option value="F">Feminino</option>
+                  <option value="O">Outro</option>
+                </Form.Select>
+              </Form.Group>
             </Row>
 
+            <Row className="mb-3">
+              <Form.Group as={Col} md="5" controlId="validationCustom07">
+                <Form.Label>Telefone</Form.Label>
+                <Form.Control
+                  type="tel"
+                  placeholder="Telefone"
+                  onChange={(e) => {
+                    setPhone(e.target.value);
+                  }}
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Por favor, informe um número válido
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Row>
             <Button type="submit">Salvar</Button>
           </Form>
         </Modal.Body>

@@ -21,12 +21,12 @@ export default function AddStudent(props) {
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+      setValidated(true);
     } else {
       event.preventDefault();
       props.newStudent(name, email, adress, phone, gender, birthday);
+      setValidated(false);
     }
-
-    setValidated(true);
   };
 
   return (
@@ -51,7 +51,6 @@ export default function AddStudent(props) {
                   required
                   type="text"
                   placeholder="Nome"
-                  value={name}
                   onChange={(e) => {
                     setName(e.target.value);
                   }}
@@ -65,7 +64,6 @@ export default function AddStudent(props) {
                 <Form.Control
                   type="text"
                   placeholder="Endereço"
-                  defaultValue={adress}
                   required
                   onChange={(e) => {
                     setAdress(e.target.value);
@@ -80,7 +78,6 @@ export default function AddStudent(props) {
                 <Form.Control
                   type="date"
                   placeholder="Nascimento"
-                  defaultValue={birthday}
                   required
                   onChange={(e) => {
                     setBirthday(e.target.value);
@@ -97,7 +94,6 @@ export default function AddStudent(props) {
                 <Form.Control
                   type="email"
                   placeholder="Email"
-                  defaultValue={email}
                   required
                   onChange={(e) => {
                     setEmail(e.target.value);
@@ -110,7 +106,7 @@ export default function AddStudent(props) {
               <Form.Group as={Col} md="4" controlId="gender">
                 <Form.Label>Gênero</Form.Label>
                 <Form.Select
-                  defaultValue={gender}
+                  defaultValue={"M"}
                   aria-label="Default select example"
                   onChange={(e) => {
                     setGender(e.target.value);
@@ -129,7 +125,6 @@ export default function AddStudent(props) {
                 <Form.Control
                   type="tel"
                   placeholder="Telefone"
-                  defaultValue={phone}
                   required
                   onChange={(e) => {
                     setPhone(e.target.value);

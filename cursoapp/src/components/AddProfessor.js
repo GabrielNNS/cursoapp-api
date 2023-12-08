@@ -22,6 +22,7 @@ export default function AddProfessor(props) {
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+      setValidated(true);
     } else {
       event.preventDefault();
       props.newProfessor(
@@ -33,17 +34,8 @@ export default function AddProfessor(props) {
         birthday,
         specialty
       );
+      setValidated(false);
     }
-
-    setValidated(true);
-
-    setName("");
-    setEmail("");
-    setPhone("");
-    setGender("");
-    setBirthday("");
-    setAdress("");
-    setSpecialty("");
   };
 
   return (
@@ -55,7 +47,7 @@ export default function AddProfessor(props) {
         + Adicionar Professor
       </button>
 
-      <Modal show={props.show} onHide={props.toggleShow} onCl>
+      <Modal show={props.show} onHide={props.toggleShow}>
         <Modal.Header closeButton>
           <Modal.Title>Adicionar</Modal.Title>
         </Modal.Header>
@@ -68,7 +60,6 @@ export default function AddProfessor(props) {
                   required
                   type="text"
                   placeholder="Nome"
-                  value={name}
                   onChange={(e) => {
                     setName(e.target.value);
                   }}
@@ -81,7 +72,6 @@ export default function AddProfessor(props) {
                   required
                   type="text"
                   placeholder="Especialidade"
-                  defaultValue={specialty}
                   onChange={(e) => {
                     setSpecialty(e.target.value);
                   }}
@@ -95,7 +85,6 @@ export default function AddProfessor(props) {
                 <Form.Control
                   type="text"
                   placeholder="Endereço"
-                  defaultValue={adress}
                   onChange={(e) => {
                     setAdress(e.target.value);
                   }}
@@ -110,7 +99,6 @@ export default function AddProfessor(props) {
                 <Form.Control
                   type="date"
                   placeholder="Nascimento"
-                  defaultValue={birthday}
                   onChange={(e) => {
                     setBirthday(e.target.value);
                   }}
@@ -127,7 +115,6 @@ export default function AddProfessor(props) {
                 <Form.Control
                   type="email"
                   placeholder="Email"
-                  defaultValue={email}
                   onChange={(e) => {
                     setEmail(e.target.value);
                   }}
@@ -141,7 +128,7 @@ export default function AddProfessor(props) {
               <Form.Group as={Col} md="4" controlId="validationCustom06">
                 <Form.Label>Gênero</Form.Label>
                 <Form.Select
-                  defaultValue={props.gender}
+                  defaultValue={"M"}
                   aria-label="Default select example"
                   onChange={(e) => {
                     setGender(e.target.value);
@@ -160,7 +147,6 @@ export default function AddProfessor(props) {
                 <Form.Control
                   type="tel"
                   placeholder="Telefone"
-                  defaultValue={phone}
                   onChange={(e) => {
                     setPhone(e.target.value);
                   }}
